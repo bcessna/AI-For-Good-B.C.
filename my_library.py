@@ -35,4 +35,9 @@ def naive_bayes(table, evidence_row, target):
 
   neg, pos = compute_probs(prob_target_N, prob_target_Y)
   return [neg, pos]
+
+def prior_prob(table, target, targetVal):
+  columnList = up_get_column(table, target)
+  pA = sum([1 if i == targetVal else 0 for i in columnList])/len(columnList)
+  return pA
   

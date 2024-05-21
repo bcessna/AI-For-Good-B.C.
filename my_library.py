@@ -20,9 +20,8 @@ def compute_probs(neg, pos):
 def cond_probs_product(table, evidenceRow, target, targetVal):
   zipColumnRow = up_zip_lists(table.columns[:-1], evidenceRow)
   problist = []
-
-for i, j in zipColumnRow: 
-  problist += [cond_prob(table, i, j, target, targetVal)]
+  for i, j in zipColumnRow: 
+    problist += [cond_prob(table, i, j, target, targetVal)]
 
 def naive_bayes(table, evidence_row, target):
   cond_prob_N = cond_probs_product(table, evidence_row, target, 0)

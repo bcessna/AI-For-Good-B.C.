@@ -6,7 +6,6 @@ def cond_prob(table, A, ax, B, bx):
   sublist = up_get_column(subtable, B)
   ColumnA = up_get_column(table, A)
   columnB = up_get_column(table, B)
-
   pBA = sum([1 if i == bx else 0 for i in sublist]) / len(sublist)
   pA = sum([1 if i == ax else 0 for i in columnA]) / len(columnA)
   pA = sum([1 if i == bx else 0 for i in columnB]) / len(columnB)

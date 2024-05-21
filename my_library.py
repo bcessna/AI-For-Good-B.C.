@@ -13,7 +13,7 @@ pA = sum([1 if i == bx else 0 for i in columnB]) / len(columnB)
 
 return pBA * pA/pB
 
-def compute_prob(neg, pos)
+def compute_prob(neg, pos):
   p0 = neg/(neg+pos)
   p1 = pos/(neg+pos)
   return [p0, p1]

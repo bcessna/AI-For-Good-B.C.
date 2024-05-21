@@ -10,8 +10,9 @@ def cond_prob(table, A, ax, B, bx):
 pBA = sum([1 if i == bx else 0 for i in sublist]) / len(sublist)
 pA = sum([1 if i == ax else 0 for i in columnA]) / len(columnA)
 pA = sum([1 if i == bx else 0 for i in columnB]) / len(columnB)
-
 return pBA * pA/pB
+
+
 def compute_probs(neg, pos): 
   p0 = neg/ (neg+pos)
   p1 = pos/(neg+pos)

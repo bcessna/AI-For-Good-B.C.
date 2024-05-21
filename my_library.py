@@ -12,8 +12,6 @@ def cond_prob(table, A, ax, B, bx):
   pA = sum([1 if i == bx else 0 for i in columnB])/len(ColumnB)
   return pBA * pA/pB
 
-
-
 def compute_probs(neg, pos): 
   p0 = neg/ (neg+pos)
   p1 = pos/(neg+pos)

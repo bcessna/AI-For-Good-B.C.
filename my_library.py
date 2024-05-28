@@ -24,10 +24,13 @@ def cond_probs_product(table, evidenceRow, target, targetVal):
 def naive_bayes(table, evidence_row, target):
   cond_prob_N = cond_probs_product(table, evidence_row, target, 0)
   prior_prob_N = prior_prob(table, target, 0)
+  
   cond_prob_Y = cond_probs_product(table, evidence_row, target, 1)
   prior_prob_Y = prior_prob(table, target, 1)
+  
   prob_target_N = (cond_prob_N) * (prior_prob_N) 
   prob_target_Y = (cond_prob_Y) * (prior_prob_Y) 
+  
   neg, pos = compute_probs(prob_target_N, prob_target_Y)
   return [neg, pos] 
 

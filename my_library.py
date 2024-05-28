@@ -26,7 +26,6 @@ def naive_bayes(table, evidence_row, target):
   prior_prob_Y = prior_prob(table, target, 1)
   prob_target_N = (cond_prob_N) * (prior_prob_N) 
   prob_target_Y = (cond_prob_Y) * (prior_prob_Y) 
-
   neg, pos = compute_probs(prob_target_N, prob_target_Y)
   return [neg, pos]
 

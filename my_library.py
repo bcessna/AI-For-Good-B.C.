@@ -56,3 +56,25 @@ def metrics(zipped_list):
       'Accuracy': accuracy
   }
   return predici_dict
+
+
+def try_archs(full_table, target, architectures, thresholds):
+
+  train_table, test_table = up_train_test_split(full_table, target, 0.4)
+
+  for a in architectures:
+    all_results = up_neural_net(train_table, test_table, a, target)
+    all_mets = []
+    for threshold in thresholds:
+      all_predictions = [1 if pos>threshold else 0 for neg, pos in all_results]
+      pred_act_list = up_zip_lists(all_predictions, up_get_column(test_table, target))
+
+      mets = metrics(pred_act_list)
+      mets ['Threshold'] = threshold
+      all_mets += [mets]
+    print(f'Architecture: {arch}')
+    print(up_metrics_table(all_mets))
+  return None 
+
+
+

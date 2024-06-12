@@ -39,23 +39,26 @@ def prior_prob(table, target, targetVal):
   pA = sum([1 if i == targetVal else 0 for i in columnList])/len(columnList)
   return pA
 
+
 def metrics(zipped_list):
+  assert isinstance(zipped_list, list), f'Parameter is not a list'
+  assert all([isinstance(i, list) for i in zipped_list]), f'Parameter is not a list of lists'
+  assert all([len(i) == 2 for i in zipped_list]), f'Parameter is not a zipped list - one or more values is not a pair of items'
+  assert all([isinstance(a,(int,float)) and isinstance(b,(int,float)) for a,b in zipped_list]), f'zipped_list contains a non-int or non-float'
+  assert all([float(a) in [0.0,1.0] and float(b) in [0.0,1.0] for a,b in zipped_list]), f'zipped_list contains a non-binary value'
+
   tn = sum([1 if pair==[0,0] else 0 for pair in zipped_list])
   tp = sum([1 if pair==[1,1] else 0 for pair in zipped_list])
   fp = sum([1 if pair==[1,0] else 0 for pair in zipped_list])
   fn = sum([1 if pair==[0,1] else 0 for pair in zipped_list])
 
-  precision = tp/(tp+fp) if (tp+fp) else 0
-  recall = tp/(tp+fn) if (tp+fn) else 0
-  F1 = 2*((precision*recall)/(precision+recall)) if (precision+recall) else 0
-  accuracy = (tp+tn)/(tp+tn+fp+fn) if (tp+tn+fp+fn) else 0
-  predici_dict = {
-      'Precision': precision,
-      'Recall': recall,
-      'F1': F1,
-      'Accuracy': accuracy
-  }
-  return predici_dict
+  precision = (tp) / (tp + fp) if (tp + fp) else 0
+  recall = (tp) / (tp + fn) if (tp + fn) else 0
+  f1 = 2*((precision * recall) / (precision + recall)) if (precision + recall) else 0
+  accuracy = (tp + tn) / (tp + tn + fp + fn) if (tp + tn + fp + fn) else 0
+
+  results = {'Precision': precision, 'Recall': recall, 'F1': f1, 'Accuracy': accuracy}
+  return results
 
 
 def try_archs(full_table, target, architectures, thresholds):
